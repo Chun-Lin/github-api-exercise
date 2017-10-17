@@ -14,7 +14,6 @@ const searchProject = () => {
     fetchGithubOwnerAndFollowers(typeProject);
 };
 
-
 const fetchGithubOwnerAndFollowers = queryProject => {
     // fetch repositories' owners by type repo name
     // fetch(`https://api.github.com/search/repositories?q=${queryProject}+language:assembly&sort=stars&order=desc`)
