@@ -1,11 +1,6 @@
-
 import { getRepos } from './api';
-import { getOwnerAndFollowers, getOwnersAndFollowers } from './handlers';
-import {
-    renderOwnerAndFollowers,
-    renderOwners,
-    renderFollowers
-} from './render';
+import { getOwnersAndFollowers } from './handlers';
+import { renderOwnerAndFollowers } from './render';
 
 const searchProjectHandler = keyword => {
     console.log(keyword);

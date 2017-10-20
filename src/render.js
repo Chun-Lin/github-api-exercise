@@ -4,35 +4,25 @@ export const renderOwnerAndFollowers = ownerAndFollowers => {
     );
 
     renderList(ownerAndFollowers.ownerName);
-    followerAvatars.map(avatar => renderImg(avatar));
+    followerAvatars.map(avatar_url => renderImg(avatar_url));
 };
 
-export const renderOwners = ownerAndFollowers => {
-    renderList(ownerAndFollowers.ownerName);
+export const renderOwners = owners => {
+    renderList(owners);
 };
 
-export const renderFollowers = ownerAndFollowers => {
-    const followerAvatars = ownerAndFollowers.followers.map(
-        follower => follower.avatar_url
-    );
-
-    followerAvatars.map(avatar => renderImg(followerAvatars));
+export const renderFollowers = followers=> {
+    renderImg(followers);
 };
 
-export const renderFollower = (ownerAndFollowers, followerName) => {
-    const followerAvatars = ownerAndFollowers.followers.map(follower => {
-        if (follower.login === followerName) {
-            return follower.avatar_url;
-        }
-    });
-
-    followerAvatars.map(avatar => renderImg(followerAvatars));
+export const renderFollower = followerName => {
+    renderImg(followerName);
 };
 
-const renderList = ownerName => {
-    document.write(`<li>${ownerName}</li>`);
+const renderList = item => {
+    document.write(`<li>${item}</li>`);
 };
 
-const renderImg = avatar => {
-    document.write(`<img src='${avatar}' height='42' width='42'>`);
+const renderImg = url => {
+    document.write(`<img src='${url}' height='42' width='42'>`);
 };

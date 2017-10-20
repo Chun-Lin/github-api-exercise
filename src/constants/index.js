@@ -1,3 +1,2 @@
-import { HOST } from './domain';
+export * from './domain';
 
-export {HOST}
