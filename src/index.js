@@ -1,16 +1,16 @@
+import co from 'co';
 import { getRepos } from './api';
 import { getOwnersAndFollowers } from './handlers';
 import { renderOwnerAndFollowers } from './render';
 
-const searchProjectHandler = keyword => {
-    console.log(keyword);
-    getRepos(keyword)
-        .then(repos => Promise.all(getOwnersAndFollowers(repos)))
-        .then(ownersWithFollowers =>
-            ownersWithFollowers.map(ownerAndFollowers =>
-                renderOwnerAndFollowers(ownerAndFollowers)
-            )
-        );
-};
+function* searchProjectHandler(keyword) {
+    try {
+        const repos = yield getRepos(keyword);
+        const ownersWithFollowers = yield Promise.all(getOwnersAndFollowers(repos));
+        ownersWithFollowers.map(ownerAndFollowers => renderOwnerAndFollowers(ownerAndFollowers));
+    } catch (err) {
+        console.log(err);
+    }
+}
 
-searchProjectHandler('test');
+co(searchProjectHandler('test')).catch(err => console.error('error', err));

@@ -1,2 +1,7 @@
 ./github-api/jsconfig.json
 .DS_Store
+generator-exercise/
+node_modules/
+yarn.lock
+package-lock.json
+scripts/
