@@ -1,29 +1,27 @@
 import qs from 'query-string';
 import { HOST } from './constants/index';
 
-const get = (path, query, method) => {
+const get = (path, query) => {
     const stringifiedQuery = qs.stringify(query);
-    const url = [HOST, path, '?q=', stringifiedQuery].join('');
-    const opts = { method };
+    const url = [HOST, path, '?', stringifiedQuery].join('');
 
-    return fetch(url, opts)
+    return fetch(url)
         .then((res) => {
-            if (res.status === 200) {
+            if (res.status !== 200) {
+                throw new Error('status is not 200');
+            } else {
                 return res.json();
             }
         })
         .catch(err => console.error('error', err));
 };
 
-export const getFollowers = owner => get(`/users/${owner}/followers`, '', 'GET');
+export const getFollowers = owner => get(`/users/${owner}/followers`, '');
 
 // fetch(`https://api.github.com/search/repositories?q=${queryProject}+language:assembly&sort=stars&order=desc`)
-export const getRepos = keyword => get(
-    '/search/repositories',
-    {
+export const getRepos = keyword =>
+    get('/search/repositories', {
         q: `${keyword}+language:assembly`,
         sort: 'stars',
         order: 'desc',
-    },
-    'GET',
-).then(data => data.items);
+    }).then(data => data.items);
