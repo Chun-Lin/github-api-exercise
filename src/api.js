@@ -7,7 +7,7 @@ const get = (path, query) => {
 
     return fetch(url)
         .then((res) => {
-            if (res.status !== 200) {
+            if (!res.ok) {
                 throw new Error('status is not 200');
             } else {
                 return res.json();
